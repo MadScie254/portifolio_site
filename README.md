@@ -43,6 +43,20 @@ To complete the website setup, please add the following images to the `assets/im
 Create an `assets/documents/` folder and add:
 - `daniel-wanjala-cv.pdf` - Your complete CV/resume
 
+### Logo and Branding Assets
+Create the following logo files:
+- `dw-logo.png` - Main logo (minimum 200x200px, PNG with transparent background)
+- `dw-logo-favicon.ico` - Favicon for browser tab (16x16, 32x32, 48x48px in ICO format)
+- `dw-logo-16.png` - Small favicon (16x16px)
+- `dw-logo-32.png` - Medium favicon (32x32px)  
+- `dw-logo-180.png` - Apple touch icon (180x180px)
+
+**Logo Design Guidelines:**
+- Use your initials "DW" in a modern, clean font
+- Incorporate blue (#3b82f6) and emerald (#10b981) colors to match the site theme
+- Ensure the logo works well on both dark and light backgrounds
+- Keep the design simple and recognizable at small sizes
+
 ## Technology Stack
 
 - **Frontend**: HTML5, CSS3, Tailwind CSS

@@ -4,7 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daniel Wanjala | Data Scientist & Machine Learning Engineer</title>
+    <link rel="icon" type="image/x-icon" href="assets/images/dw-logo-favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/dw-logo-180.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/dw-logo-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/dw-logo-16.png">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
@@ -97,9 +102,107 @@
             font-family: 'IBM Plex Sans', sans-serif;
             font-weight: 700;
             background: linear-gradient(90deg, var(--accent-blue) 0%, var(--accent-emerald) 100%);
-            background-clip: text;
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
+        }
+        
+        /* Logo styles */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .logo-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+        
+        .logo-img:hover {
+            transform: scale(1.05);
+        }
+        
+        /* Preloader styles */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+        
+        .preloader.fade-out {
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .preloader-logo {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 20px;
+            border-radius: 16px;
+            animation: pulse 2s infinite;
+        }
+        
+        .preloader-text {
+            color: var(--text-primary);
+            font-family: 'IBM Plex Sans', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-top: 20px;
+            animation: fadeInOut 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+        
+        .loading-dots {
+            display: flex;
+            gap: 4px;
+            margin-top: 10px;
+        }
+        
+        .loading-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent-blue);
+            border-radius: 50%;
+            animation: loadingDots 1.4s infinite both;
+        }
+        
+        .loading-dot:nth-child(1) { animation-delay: -0.32s; }
+        .loading-dot:nth-child(2) { animation-delay: -0.16s; }
+        .loading-dot:nth-child(3) { animation-delay: 0s; }
+        
+        @keyframes loadingDots {
+            0%, 80%, 100% {
+                transform: scale(0);
+            }
+            40% {
+                transform: scale(1);
+            }
+        }
+        
+        .lottie-animation {
+            width: 100px;
+            height: 100px;
         }
         
         /* Navigation styles */
@@ -192,13 +295,35 @@
         }
     </style>
 </head>
-<body class="dark">
+<body>
+    <!-- Preloader -->
+    <div id="preloader" class="preloader">
+        <img src="assets/images/dw-logo.png" alt="DW Logo" class="preloader-logo">
+        <lottie-player
+            src="https://assets5.lottiefiles.com/packages/lf20_1wmlj28p.json"
+            background="transparent"
+            speed="1"
+            class="lottie-animation"
+            loop
+            autoplay>
+        </lottie-player>
+        <div class="preloader-text">Loading Portfolio...</div>
+        <div class="loading-dots">
+            <div class="loading-dot"></div>
+            <div class="loading-dot"></div>
+            <div class="loading-dot"></div>
+        </div>
+    </div>
+
     <!-- Navigation -->
     <nav class="fixed w-full nav-bg backdrop-blur-md z-50 border-b border-gray-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
                 <div class="flex items-center">
-                    <span class="initials-logo text-2xl">DW</span>
+                    <div class="logo-container">
+                        <img src="assets/images/dw-logo.png" alt="Daniel Wanjala Logo" class="logo-img">
+                        <span class="initials-logo text-2xl">DW</span>
+                    </div>
                 </div>
                 <div class="hidden md:flex items-center space-x-8">
                     <a href="#about" class="text-secondary hover:text-primary transition-colors">About</a>
@@ -1117,6 +1242,7 @@
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div class="col-span-1 md:col-span-2">
                     <div class="flex items-center mb-4">
+                        <img src="assets/images/dw-logo.png" alt="Daniel Wanjala Logo" class="logo-img mr-3">
                         <span class="initials-logo text-2xl mr-3">DW</span>
                         <span class="text-primary font-semibold">Daniel Wanjala</span>
                     </div>
@@ -1175,17 +1301,41 @@
     </a>
 
     <script>
+        // Preloader functionality
+        window.addEventListener('load', function() {
+            const preloader = document.getElementById('preloader');
+            
+            // Fallback for Lottie animation loading issues
+            const lottiePlayer = document.querySelector('lottie-player');
+            if (lottiePlayer) {
+                lottiePlayer.addEventListener('error', function() {
+                    lottiePlayer.style.display = 'none';
+                });
+            }
+            
+            // Minimum loading time of 2 seconds for UX
+            setTimeout(() => {
+                preloader.classList.add('fade-out');
+                
+                // Remove preloader from DOM after fade animation
+                setTimeout(() => {
+                    preloader.remove();
+                }, 500);
+            }, 2000);
+        });
+
         // Theme toggle functionality
         const themeToggle = document.getElementById('theme-toggle');
         const body = document.body;
         const icon = themeToggle.querySelector('i');
 
-        // Load saved theme or default to dark
+        // Load saved theme or default to dark mode
         const savedTheme = localStorage.getItem('theme') || 'dark';
         if (savedTheme === 'light') {
             body.classList.add('light');
             icon.classList.replace('fa-moon', 'fa-sun');
         }
+        // For dark mode (default), no additional class needed
 
         themeToggle.addEventListener('click', () => {
             body.classList.toggle('light');
