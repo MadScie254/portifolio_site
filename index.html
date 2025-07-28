@@ -9,29 +9,55 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
         
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #0a0a0a;
-            color: #f8f8f8;
-        }
-        
-        .dark {
-            background-color: #0a0a0a;
-            color: #f8f8f8;
+        :root {
+            --primary-bg: #1a1a1a;
+            --secondary-bg: #2d2d2d;
+            --card-bg: #333333;
+            --text-primary: #ffffff;
+            --text-secondary: #b3b3b3;
+            --text-muted: #808080;
+            --border-color: #404040;
+            --accent-blue: #3b82f6;
+            --accent-emerald: #10b981;
+            --gradient-from: #0f172a;
+            --gradient-via: #1e3a8a;
+            --gradient-to: #3b82f6;
         }
         
         .light {
-            background-color: #f8f8f8;
-            color: #0a0a0a;
+            --primary-bg: #ffffff;
+            --secondary-bg: #f8fafc;
+            --card-bg: #f1f5f9;
+            --text-primary: #1e293b;
+            --text-secondary: #475569;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --accent-blue: #2563eb;
+            --accent-emerald: #059669;
+            --gradient-from: #f8fafc;
+            --gradient-via: #e2e8f0;
+            --gradient-to: #cbd5e1;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--text-primary);
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
         
         h1, h2, h3, h4, h5, h6 {
             font-family: 'IBM Plex Sans', sans-serif;
             font-weight: 600;
+            color: var(--text-primary);
         }
         
         .hero-gradient {
-            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #3b82f6 100%);
+            background: linear-gradient(135deg, var(--gradient-from) 0%, var(--gradient-via) 50%, var(--gradient-to) 100%);
+        }
+        
+        .light .hero-gradient {
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 50%, #cbd5e1 100%);
         }
         
         .card-hover {
@@ -40,6 +66,10 @@
         
         .card-hover:hover {
             transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .light .card-hover:hover {
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
         
@@ -54,38 +84,132 @@
             left: 0;
             width: 100%;
             height: 100px;
-            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" fill="%230a0a0a"/><path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" fill="%230a0a0a"/><path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" fill="%230a0a0a"/></svg>');
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" fill="%231a1a1a"/><path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" fill="%231a1a1a"/><path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" fill="%231a1a1a"/></svg>');
             background-size: cover;
             z-index: 10;
+        }
+        
+        .light .wave-shape::after {
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" fill="%23f8fafc"/><path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" fill="%23f8fafc"/><path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" fill="%23f8fafc"/></svg>');
         }
         
         .initials-logo {
             font-family: 'IBM Plex Sans', sans-serif;
             font-weight: 700;
-            background: linear-gradient(90deg, #3b82f6 0%, #10b981 100%);
+            background: linear-gradient(90deg, var(--accent-blue) 0%, var(--accent-emerald) 100%);
+            background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+        }
+        
+        /* Navigation styles */
+        .nav-bg {
+            background-color: rgba(26, 26, 26, 0.9);
+            border-color: var(--border-color);
+        }
+        
+        .light .nav-bg {
+            background-color: rgba(248, 250, 252, 0.9);
+        }
+        
+        /* Section backgrounds */
+        .section-primary {
+            background-color: var(--primary-bg);
+        }
+        
+        .section-secondary {
+            background-color: var(--secondary-bg);
+        }
+        
+        .card-bg {
+            background-color: var(--card-bg);
+            border-color: var(--border-color);
+        }
+        
+        /* Text colors */
+        .text-primary {
+            color: var(--text-primary);
+        }
+        
+        .text-secondary {
+            color: var(--text-secondary);
+        }
+        
+        .text-muted {
+            color: var(--text-muted);
+        }
+        
+        /* WhatsApp floating button */
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25d366;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 24px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .whatsapp-float:hover {
+            background-color: #128c7e;
+            transform: scale(1.1);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+        }
+        
+        /* Tech stack icons */
+        .tech-icon {
+            width: 40px;
+            height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            margin: 4px;
+            transition: transform 0.2s ease;
+        }
+        
+        .tech-icon:hover {
+            transform: scale(1.1);
+        }
+        
+        /* Border utilities */
+        .border-themed {
+            border-color: var(--border-color);
+        }
+        
+        .border-t-themed {
+            border-top: 1px solid var(--border-color);
         }
     </style>
 </head>
 <body class="dark">
     <!-- Navigation -->
-    <nav class="fixed w-full bg-black bg-opacity-90 backdrop-blur-md z-50 border-b border-gray-800">
+    <nav class="fixed w-full nav-bg backdrop-blur-md z-50 border-b border-gray-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
                 <div class="flex items-center">
                     <span class="initials-logo text-2xl">DW</span>
                 </div>
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="#about" class="text-gray-300 hover:text-white transition-colors">About</a>
-                    <a href="#services" class="text-gray-300 hover:text-white transition-colors">Services</a>
-                    <a href="#projects" class="text-gray-300 hover:text-white transition-colors">Projects</a>
-                    <a href="#resources" class="text-gray-300 hover:text-white transition-colors">Resources</a>
-                    <a href="#contact" class="text-gray-300 hover:text-white transition-colors">Contact</a>
+                    <a href="#about" class="text-secondary hover:text-primary transition-colors">About</a>
+                    <a href="#services" class="text-secondary hover:text-primary transition-colors">Services</a>
+                    <a href="#projects" class="text-secondary hover:text-primary transition-colors">Projects</a>
+                    <a href="#resources" class="text-secondary hover:text-primary transition-colors">Resources</a>
+                    <a href="#contact" class="text-secondary hover:text-primary transition-colors">Contact</a>
                 </div>
                 <div class="flex items-center">
-                    <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-800 transition-colors" title="Toggle dark/light theme" aria-label="Toggle dark/light theme">
-                        <i class="fas fa-moon text-gray-300"></i>
+                    <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-800 light:hover:bg-gray-200 transition-colors" title="Toggle dark/light theme" aria-label="Toggle dark/light theme">
+                        <i class="fas fa-moon text-secondary"></i>
                     </button>
                     <button class="ml-4 px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-md text-white transition-colors md:hidden" title="Toggle navigation menu" aria-label="Toggle navigation menu">
                         <i class="fas fa-bars"></i>
@@ -104,7 +228,7 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <div>
                     <h1 class="text-4xl md:text-5xl font-bold mb-6">Building intelligent systems that <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">challenge the status quo</span></h1>
-                    <p class="text-xl text-gray-300 mb-8">Hi, I'm Daniel Wanjala - a Data Scientist and Machine Learning Engineer weaponizing data to make truth, transparency, and transformation scalable.</p>
+                    <p class="text-xl text-secondary mb-8">Hi, I'm Daniel Wanjala - a Data Scientist and Machine Learning Engineer weaponizing data to make truth, transparency, and transformation scalable.</p>
                     <div class="flex flex-wrap gap-4">
                         <a href="#contact" class="px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-md text-white font-medium transition-colors">
                             Hire Me
@@ -125,9 +249,9 @@
     </section>
 
     <!-- Clients/Partners Section -->
-    <section class="py-12 bg-gray-900">
+    <section class="py-12 section-secondary">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-2xl font-bold text-center mb-12">Trusted by innovators and organizations</h2>
+            <h2 class="text-2xl font-bold text-center mb-12 text-primary">Trusted by innovators and organizations</h2>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8 items-center">
                 <div class="flex justify-center">
                     <img src="assets/images/cbk-logo.png" alt="CBK Logo - Central Bank of Kenya" class="h-12 opacity-70 hover:opacity-100 transition-opacity">
@@ -146,17 +270,17 @@
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-20 bg-black">
+    <section id="about" class="py-20 section-primary">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <div>
                     <h2 class="text-3xl font-bold mb-6">About <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">Daniel Wanjala</span></h2>
-                    <p class="text-lg text-gray-300 mb-6">From growing up in Kenya and witnessing systemic inefficiencies firsthand, I've dedicated my career to using data science and machine learning as tools for economic transformation and social impact.</p>
-                    <p class="text-lg text-gray-300 mb-6">Currently serving as <span class="text-white font-medium">Senior IT Manager and Data Scientist at Kingdom Hospital</span>, I bridge the gap between technology infrastructure and data-driven healthcare solutions. My journey from self-taught coder to professional data scientist has been driven by one question: <span class="text-white font-medium">"How can we use technology to create systems that serve people better?"</span></p>
-                    <p class="text-lg text-gray-300 mb-8">I'm pursuing an <span class="text-white font-medium">MSc in Data Science at Cooperative University of Kenya</span> while continuing to develop predictive models for healthcare analytics, economic forecasting, and social impact measurement.</p>
+                    <p class="text-lg text-secondary mb-6">From growing up in Kenya and witnessing systemic inefficiencies firsthand, I've dedicated my career to using data science and machine learning as tools for economic transformation and social impact.</p>
+                    <p class="text-lg text-secondary mb-6">Currently serving as <span class="text-primary font-medium">Senior IT Manager and Data Scientist at Kingdom Hospital</span>, I bridge the gap between technology infrastructure and data-driven healthcare solutions. My journey from self-taught coder to professional data scientist has been driven by one question: <span class="text-primary font-medium">"How can we use technology to create systems that serve people better?"</span></p>
+                    <p class="text-lg text-secondary mb-8">I'm pursuing an <span class="text-primary font-medium">MSc in Data Science at Cooperative University of Kenya</span> while continuing to develop predictive models for healthcare analytics, economic forecasting, and social impact measurement.</p>
                     
                     <div class="mb-8">
-                        <h3 class="text-xl font-semibold mb-4">Education & Training</h3>
+                        <h3 class="text-xl font-semibold mb-4 text-primary">Education & Training</h3>
                         <ul class="space-y-4">
                             <li class="flex items-start">
                                 <div class="bg-blue-600 p-1 rounded-full mr-3 mt-1 flex-shrink-0">
@@ -164,7 +288,7 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                                     </svg>
                                 </div>
-                                <span class="text-gray-300"><span class="font-medium text-white">MSc in Data Science</span> - Cooperative University of Kenya (2024 - Present)</span>
+                                <span class="text-secondary"><span class="font-medium text-primary">MSc in Data Science</span> - Cooperative University of Kenya (2024 - Present)</span>
                             </li>
                             <li class="flex items-start">
                                 <div class="bg-blue-600 p-1 rounded-full mr-3 mt-1 flex-shrink-0">
@@ -172,7 +296,7 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                                     </svg>
                                 </div>
-                                <span class="text-gray-300"><span class="font-medium text-white">BSc in Information Technology</span> - Zetech University (2019 - 2022)</span>
+                                <span class="text-secondary"><span class="font-medium text-primary">BSc in Information Technology</span> - Zetech University (2019 - 2022)</span>
                             </li>
                             <li class="flex items-start">
                                 <div class="bg-blue-600 p-1 rounded-full mr-3 mt-1 flex-shrink-0">
@@ -180,9 +304,28 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                                     </svg>
                                 </div>
-                                <span class="text-gray-300"><span class="font-medium text-white">Certificate in Data Science & ML</span> - Moringa School (2023)</span>
+                                <span class="text-secondary"><span class="font-medium text-primary">Certificate in Data Science & ML</span> - Moringa School (2023)</span>
                             </li>
                         </ul>
+                    </div>
+                    
+                    <!-- Tech Stack Section -->
+                    <div class="mb-8">
+                        <h3 class="text-xl font-semibold mb-4 text-primary">Technology Stack</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="tech-icon bg-blue-100 text-blue-800" title="Python">🐍</span>
+                            <span class="tech-icon bg-orange-100 text-orange-800" title="TensorFlow">🧠</span>
+                            <span class="tech-icon bg-green-100 text-green-800" title="Scikit-learn">📊</span>
+                            <span class="tech-icon bg-purple-100 text-purple-800" title="Pandas">🐼</span>
+                            <span class="tech-icon bg-red-100 text-red-800" title="PyTorch">🔥</span>
+                            <span class="tech-icon bg-yellow-100 text-yellow-800" title="JavaScript">⚡</span>
+                            <span class="tech-icon bg-blue-100 text-blue-800" title="React">⚛️</span>
+                            <span class="tech-icon bg-green-100 text-green-800" title="Node.js">🚀</span>
+                            <span class="tech-icon bg-gray-100 text-gray-800" title="Docker">🐳</span>
+                            <span class="tech-icon bg-orange-100 text-orange-800" title="AWS">☁️</span>
+                            <span class="tech-icon bg-blue-100 text-blue-800" title="PostgreSQL">🗄️</span>
+                            <span class="tech-icon bg-red-100 text-red-800" title="MongoDB">🍃</span>
+                        </div>
                     </div>
                     
                     <a href="assets/documents/daniel-wanjala-cv.pdf" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-blue-400 hover:text-blue-300 transition-colors">
@@ -193,33 +336,33 @@
                     </a>
                 </div>
                 <div class="grid grid-cols-2 gap-4">
-                    <div class="bg-gray-900 rounded-xl p-6 card-hover">
+                    <div class="card-bg rounded-xl p-6 card-hover">
                         <div class="text-blue-400 text-3xl mb-4">
                             <i class="fas fa-chart-line"></i>
                         </div>
-                        <h3 class="text-xl font-semibold mb-2">Data Science</h3>
-                        <p class="text-gray-400">Transforming raw data into actionable economic insights and predictive models.</p>
+                        <h3 class="text-xl font-semibold mb-2 text-primary">Data Science</h3>
+                        <p class="text-muted">Transforming raw data into actionable economic insights and predictive models.</p>
                     </div>
-                    <div class="bg-gray-900 rounded-xl p-6 card-hover">
+                    <div class="card-bg rounded-xl p-6 card-hover">
                         <div class="text-emerald-400 text-3xl mb-4">
                             <i class="fas fa-robot"></i>
                         </div>
-                        <h3 class="text-xl font-semibold mb-2">Machine Learning</h3>
-                        <p class="text-gray-400">Building and deploying AI models that solve real-world problems in emerging markets.</p>
+                        <h3 class="text-xl font-semibold mb-2 text-primary">Machine Learning</h3>
+                        <p class="text-muted">Building and deploying AI models that solve real-world problems in emerging markets.</p>
                     </div>
-                    <div class="bg-gray-900 rounded-xl p-6 card-hover">
+                    <div class="card-bg rounded-xl p-6 card-hover">
                         <div class="text-purple-400 text-3xl mb-4">
                             <i class="fas fa-project-diagram"></i>
                         </div>
-                        <h3 class="text-xl font-semibold mb-2">Systems Thinking</h3>
-                        <p class="text-gray-400">Analyzing complex systems to identify leverage points for meaningful change.</p>
+                        <h3 class="text-xl font-semibold mb-2 text-primary">Systems Thinking</h3>
+                        <p class="text-muted">Analyzing complex systems to identify leverage points for meaningful change.</p>
                     </div>
-                    <div class="bg-gray-900 rounded-xl p-6 card-hover">
+                    <div class="card-bg rounded-xl p-6 card-hover">
                         <div class="text-yellow-400 text-3xl mb-4">
                             <i class="fas fa-lightbulb"></i>
                         </div>
-                        <h3 class="text-xl font-semibold mb-2">Technical Strategy</h3>
-                        <p class="text-gray-400">Advising organizations on data-driven decision making and digital transformation.</p>
+                        <h3 class="text-xl font-semibold mb-2 text-primary">Technical Strategy</h3>
+                        <p class="text-muted">Advising organizations on data-driven decision making and digital transformation.</p>
                     </div>
                 </div>
             </div>
@@ -227,20 +370,20 @@
     </section>
 
     <!-- Services Section -->
-    <section id="services" class="py-20 bg-gray-900">
+    <section id="services" class="py-20 section-secondary">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold mb-4">My <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">Services</span></h2>
-                <p class="text-xl text-gray-400 max-w-3xl mx-auto">I combine technical expertise with domain-specific knowledge to deliver solutions that create real impact.</p>
+                <h2 class="text-3xl font-bold mb-4 text-primary">My <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">Services</span></h2>
+                <p class="text-xl text-secondary max-w-3xl mx-auto">I combine technical expertise with domain-specific knowledge to deliver solutions that create real impact.</p>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="bg-gray-800 rounded-xl p-8 card-hover border border-gray-700">
+                <div class="card-bg rounded-xl p-8 card-hover border">
                     <div class="text-blue-400 text-4xl mb-6">
                         <i class="fas fa-brain"></i>
                     </div>
-                    <h3 class="text-2xl font-bold mb-4">AI & Machine Learning</h3>
-                    <p class="text-gray-400 mb-6">Custom machine learning solutions tailored to your specific business needs, with a focus on predictive analytics and automation.</p>
+                    <h3 class="text-2xl font-bold mb-4 text-primary">AI & Machine Learning</h3>
+                    <p class="text-secondary mb-6">Custom machine learning solutions tailored to your specific business needs, with a focus on predictive analytics and automation.</p>
                     <ul class="space-y-3 mb-8">
                         <li class="flex items-start">
                             <div class="bg-blue-600 p-1 rounded-full mr-3 flex-shrink-0">
@@ -248,7 +391,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                                 </svg>
                             </div>
-                            <span class="text-gray-300">Predictive modeling</span>
+                            <span class="text-secondary">Predictive modeling & forecasting</span>
                         </li>
                         <li class="flex items-start">
                             <div class="bg-blue-600 p-1 rounded-full mr-3 flex-shrink-0">
@@ -256,7 +399,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                                 </svg>
                             </div>
-                            <span class="text-gray-300">Natural language processing</span>
+                            <span class="text-secondary">Natural language processing (NLP)</span>
                         </li>
                         <li class="flex items-start">
                             <div class="bg-blue-600 p-1 rounded-full mr-3 flex-shrink-0">
@@ -264,7 +407,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                                 </svg>
                             </div>
-                            <span class="text-gray-300">Anomaly detection systems</span>
+                            <span class="text-secondary">Computer vision & image analysis</span>
                         </li>
                         <li class="flex items-start">
                             <div class="bg-blue-600 p-1 rounded-full mr-3 flex-shrink-0">
@@ -272,23 +415,31 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                                 </svg>
                             </div>
-                            <span class="text-gray-300">Custom recommendation engines</span>
+                            <span class="text-secondary">Recommendation engines & chatbots</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="bg-blue-600 p-1 rounded-full mr-3 flex-shrink-0">
+                                <svg class="h-3 w-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                            </div>
+                            <span class="text-secondary">Model deployment & MLOps</span>
                         </li>
                     </ul>
-                    <div class="border-t border-gray-700 pt-6">
-                        <p class="text-gray-400 mb-4">Starting from <span class="text-white font-bold">\$1,500</span></p>
+                    <div class="border-t-themed pt-6">
+                        <p class="text-secondary mb-4">Starting from <span class="text-primary font-bold">KES 15,000</span></p>
                         <a href="#contact" class="block text-center px-6 py-3 bg-gradient-to-r from-blue-600 to-emerald-500 hover:from-blue-700 hover:to-emerald-600 rounded-md text-white transition-colors">
                             Get Started
                         </a>
                     </div>
                 </div>
                 
-                <div class="bg-gray-800 rounded-xl p-8 card-hover border border-gray-700">
+                <div class="card-bg rounded-xl p-8 card-hover border">
                     <div class="text-emerald-400 text-4xl mb-6">
                         <i class="fas fa-chart-bar"></i>
                     </div>
-                    <h3 class="text-2xl font-bold mb-4">Data Analytics & Visualization</h3>
-                    <p class="text-gray-400 mb-6">Interactive dashboards and reports that transform complex data into clear, actionable business intelligence.</p>
+                    <h3 class="text-2xl font-bold mb-4 text-primary">Data Analytics & Visualization</h3>
+                    <p class="text-secondary mb-6">Interactive dashboards and reports that transform complex data into clear, actionable business intelligence.</p>
                     <ul class="space-y-3 mb-8">
                         <li class="flex items-start">
                             <div class="bg-emerald-600 p-1 rounded-full mr-3 flex-shrink-0">
@@ -296,7 +447,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                                 </svg>
                             </div>
-                            <span class="text-gray-300">Business intelligence dashboards</span>
+                            <span class="text-secondary">Interactive dashboards (Power BI, Tableau)</span>
                         </li>
                         <li class="flex items-start">
                             <div class="bg-emerald-600 p-1 rounded-full mr-3 flex-shrink-0">
@@ -304,7 +455,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                                 </svg>
                             </div>
-                            <span class="text-gray-300">Data cleaning & preprocessing</span>
+                            <span class="text-secondary">Data cleaning & preprocessing</span>
                         </li>
                         <li class="flex items-start">
                             <div class="bg-emerald-600 p-1 rounded-full mr-3 flex-shrink-0">
@@ -312,7 +463,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                                 </svg>
                             </div>
-                            <span class="text-gray-300">Automated reporting systems</span>
+                            <span class="text-secondary">Automated reporting systems</span>
                         </li>
                         <li class="flex items-start">
                             <div class="bg-emerald-600 p-1 rounded-full mr-3 flex-shrink-0">
@@ -320,23 +471,31 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                                 </svg>
                             </div>
-                            <span class="text-gray-300">Economic data analysis</span>
+                            <span class="text-secondary">Statistical analysis & KPI tracking</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="bg-emerald-600 p-1 rounded-full mr-3 flex-shrink-0">
+                                <svg class="h-3 w-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                            </div>
+                            <span class="text-secondary">Economic & financial data analysis</span>
                         </li>
                     </ul>
-                    <div class="border-t border-gray-700 pt-6">
-                        <p class="text-gray-400 mb-4">Starting from <span class="text-white font-bold">\$800</span></p>
+                    <div class="border-t-themed pt-6">
+                        <p class="text-secondary mb-4">Starting from <span class="text-primary font-bold">KES 10,000</span></p>
                         <a href="#contact" class="block text-center px-6 py-3 bg-gradient-to-r from-blue-600 to-emerald-500 hover:from-blue-700 hover:to-emerald-600 rounded-md text-white transition-colors">
                             Get Started
                         </a>
                     </div>
                 </div>
                 
-                <div class="bg-gray-800 rounded-xl p-8 card-hover border border-gray-700">
+                <div class="card-bg rounded-xl p-8 card-hover border">
                     <div class="text-purple-400 text-4xl mb-6">
                         <i class="fas fa-project-diagram"></i>
                     </div>
-                    <h3 class="text-2xl font-bold mb-4">MVP Development</h3>
-                    <p class="text-gray-400 mb-6">Rapid development of minimum viable products to validate your business idea with real users.</p>
+                    <h3 class="text-2xl font-bold mb-4 text-primary">MVP Development</h3>
+                    <p class="text-secondary mb-6">Rapid development of minimum viable products to validate your business idea with real users and stakeholders.</p>
                     <ul class="space-y-3 mb-8">
                         <li class="flex items-start">
                             <div class="bg-purple-600 p-1 rounded-full mr-3 flex-shrink-0">
@@ -344,7 +503,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                                 </svg>
                             </div>
-                            <span class="text-gray-300">Prototype development</span>
+                            <span class="text-secondary">Full-stack web applications</span>
                         </li>
                         <li class="flex items-start">
                             <div class="bg-purple-600 p-1 rounded-full mr-3 flex-shrink-0">
@@ -352,7 +511,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                                 </svg>
                             </div>
-                            <span class="text-gray-300">Web application development</span>
+                            <span class="text-secondary">Mobile-responsive design</span>
                         </li>
                         <li class="flex items-start">
                             <div class="bg-purple-600 p-1 rounded-full mr-3 flex-shrink-0">
@@ -360,7 +519,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                                 </svg>
                             </div>
-                            <span class="text-gray-300">API integrations</span>
+                            <span class="text-secondary">API development & integrations</span>
                         </li>
                         <li class="flex items-start">
                             <div class="bg-purple-600 p-1 rounded-full mr-3 flex-shrink-0">
@@ -368,11 +527,19 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                                 </svg>
                             </div>
-                            <span class="text-gray-300">Technical feasibility assessment</span>
+                            <span class="text-secondary">Database design & optimization</span>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="bg-purple-600 p-1 rounded-full mr-3 flex-shrink-0">
+                                <svg class="h-3 w-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                </svg>
+                            </div>
+                            <span class="text-secondary">Technical feasibility assessment</span>
                         </li>
                     </ul>
-                    <div class="border-t border-gray-700 pt-6">
-                        <p class="text-gray-400 mb-4">Starting from <span class="text-white font-bold">\$2,500</span></p>
+                    <div class="border-t-themed pt-6">
+                        <p class="text-secondary mb-4">Starting from <span class="text-primary font-bold">KES 30,000</span></p>
                         <a href="#contact" class="block text-center px-6 py-3 bg-gradient-to-r from-blue-600 to-emerald-500 hover:from-blue-700 hover:to-emerald-600 rounded-md text-white transition-colors">
                             Get Started
                         </a>
@@ -380,11 +547,11 @@
                 </div>
             </div>
             
-            <div class="mt-16 bg-black rounded-xl p-8 border border-gray-800">
+            <div class="mt-16 section-primary rounded-xl p-8 border border-themed">
                 <div class="max-w-4xl mx-auto text-center">
-                    <h3 class="text-2xl font-bold mb-4">Custom Solutions for Your Needs</h3>
-                    <p class="text-gray-400 mb-6">Have a unique challenge that doesn't fit these boxes? Let's discuss how we can craft a tailored solution for your specific requirements.</p>
-                    <a href="#contact" class="inline-flex px-6 py-3 border border-gray-700 hover:border-gray-600 rounded-md text-white font-medium transition-colors">
+                    <h3 class="text-2xl font-bold mb-4 text-primary">Custom Solutions for Your Needs</h3>
+                    <p class="text-secondary mb-6">Have a unique challenge that doesn't fit these boxes? Let's discuss how we can craft a tailored solution for your specific requirements.</p>
+                    <a href="#contact" class="inline-flex px-6 py-3 border border-themed hover:border-gray-600 rounded-md text-primary font-medium transition-colors">
                         Schedule a Consultation
                     </a>
                 </div>
@@ -393,23 +560,23 @@
     </section>
 
     <!-- Projects Section -->
-    <section id="projects" class="py-20 bg-black">
+    <section id="projects" class="py-20 section-primary">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold mb-4">Featured <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">Projects</span></h2>
-                <p class="text-xl text-gray-400 max-w-3xl mx-auto">A selection of my most impactful work solving real problems with data and technology.</p>
+                <h2 class="text-3xl font-bold mb-4 text-primary">Featured <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">Projects</span></h2>
+                <p class="text-xl text-secondary max-w-3xl mx-auto">A selection of my most impactful work solving real problems with data and technology.</p>
             </div>
             
             <div class="grid grid-cols-1 gap-12">
-                <div class="bg-gray-900 rounded-2xl overflow-hidden border border-gray-800">
+                <div class="card-bg rounded-2xl overflow-hidden border border-themed">
                     <div class="grid grid-cols-1 lg:grid-cols-2">
                         <div class="p-8 lg:p-12">
                             <div class="flex items-center mb-4">
                                 <span class="bg-blue-900 text-blue-400 text-xs font-semibold px-3 py-1 rounded-full mr-3">AI/ML</span>
                                 <span class="bg-emerald-900 text-emerald-400 text-xs font-semibold px-3 py-1 rounded-full">Finance</span>
                             </div>
-                            <h3 class="text-2xl font-bold mb-4">InvestWise Predictor</h3>
-                            <p class="text-gray-400 mb-6">An AI-powered investment analysis tool that helps investors navigate the Kenyan financial markets with predictive analytics and risk assessment.</p>
+                            <h3 class="text-2xl font-bold mb-4 text-primary">InvestWise Predictor</h3>
+                            <p class="text-secondary mb-6">An AI-powered investment analysis tool that helps investors navigate the Kenyan financial markets with predictive analytics and risk assessment.</p>
                             <div class="mb-8">
                                 <h4 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3">Technologies Used</h4>
                                 <div class="flex flex-wrap gap-2">
@@ -808,25 +975,25 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-gray-900">
+    <section id="contact" class="py-20 section-secondary">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold mb-4">Let's Build Something <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">Amazing Together</span></h2>
-                <p class="text-xl text-gray-400 max-w-3xl mx-auto">Ready to transform your data into actionable insights? Let's discuss your project and explore how we can leverage technology to achieve your goals.</p>
+                <h2 class="text-3xl font-bold mb-4 text-primary">Let's Build Something <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">Amazing Together</span></h2>
+                <p class="text-xl text-secondary max-w-3xl mx-auto">Ready to transform your data into actionable insights? Let's discuss your project and explore how we can leverage technology to achieve your goals.</p>
             </div>
             
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
                 <div>
                     <div class="mb-8">
-                        <h3 class="text-2xl font-bold mb-6">Get in Touch</h3>
+                        <h3 class="text-2xl font-bold mb-6 text-primary">Get in Touch</h3>
                         <div class="space-y-6">
                             <div class="flex items-center">
                                 <div class="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center mr-4">
                                     <i class="fas fa-envelope text-white"></i>
                                 </div>
                                 <div>
-                                    <p class="text-gray-400 text-sm">Email</p>
-                                    <a href="mailto:dmwanjala254@gmail.com" class="text-white font-medium hover:text-blue-400 transition-colors">dmwanjala254@gmail.com</a>
+                                    <p class="text-muted text-sm">Email</p>
+                                    <a href="mailto:dmwanjala254@gmail.com" class="text-primary font-medium hover:text-blue-400 transition-colors">dmwanjala254@gmail.com</a>
                                 </div>
                             </div>
                             
@@ -835,94 +1002,104 @@
                                     <i class="fab fa-linkedin text-white"></i>
                                 </div>
                                 <div>
-                                    <p class="text-gray-400 text-sm">LinkedIn</p>
-                                    <a href="https://www.linkedin.com/in/daniel-wanjala-91/" target="_blank" rel="noopener noreferrer" class="text-white font-medium hover:text-blue-400 transition-colors">Connect with me</a>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center">
-                                <div class="w-12 h-12 bg-gray-800 rounded-lg flex items-center justify-center mr-4">
-                                    <i class="fab fa-github text-white"></i>
-                                </div>
-                                <div>
-                                    <p class="text-gray-400 text-sm">GitHub</p>
-                                    <a href="https://github.com/MadScie254" target="_blank" rel="noopener noreferrer" class="text-white font-medium hover:text-blue-400 transition-colors">View my repositories</a>
+                                    <p class="text-muted text-sm">LinkedIn</p>
+                                    <a href="https://www.linkedin.com/in/daniel-wanjala-91/" target="_blank" rel="noopener noreferrer" class="text-primary font-medium hover:text-blue-400 transition-colors">Connect with me</a>
                                 </div>
                             </div>
                             
                             <div class="flex items-center">
                                 <div class="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center mr-4">
-                                    <i class="fas fa-code text-white"></i>
+                                    <i class="fab fa-whatsapp text-white"></i>
                                 </div>
                                 <div>
-                                    <p class="text-gray-400 text-sm">HackerRank</p>
-                                    <a href="https://www.hackerrank.com/profile/MadScie254" target="_blank" rel="noopener noreferrer" class="text-white font-medium hover:text-blue-400 transition-colors">See my coding profile</a>
+                                    <p class="text-muted text-sm">WhatsApp</p>
+                                    <a href="https://wa.me/254742007277?text=Hello%20Daniel!%20I'm%20interested%20in%20your%20services." target="_blank" rel="noopener noreferrer" class="text-primary font-medium hover:text-blue-400 transition-colors">Chat on WhatsApp</a>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 bg-gray-800 light:bg-gray-300 rounded-lg flex items-center justify-center mr-4">
+                                    <i class="fab fa-github text-white light:text-gray-800"></i>
+                                </div>
+                                <div>
+                                    <p class="text-muted text-sm">GitHub</p>
+                                    <a href="https://github.com/MadScie254" target="_blank" rel="noopener noreferrer" class="text-primary font-medium hover:text-blue-400 transition-colors">View my repositories</a>
                                 </div>
                             </div>
                             
                             <div class="flex items-center">
                                 <div class="w-12 h-12 bg-emerald-600 rounded-lg flex items-center justify-center mr-4">
+                                    <i class="fas fa-code text-white"></i>
+                                </div>
+                                <div>
+                                    <p class="text-muted text-sm">HackerRank</p>
+                                    <a href="https://www.hackerrank.com/profile/MadScie254" target="_blank" rel="noopener noreferrer" class="text-primary font-medium hover:text-blue-400 transition-colors">See my coding profile</a>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 bg-red-600 rounded-lg flex items-center justify-center mr-4">
                                     <i class="fas fa-map-marker-alt text-white"></i>
                                 </div>
                                 <div>
-                                    <p class="text-gray-400 text-sm">Location</p>
-                                    <p class="text-white font-medium">Nairobi, Kenya 🇰🇪</p>
+                                    <p class="text-muted text-sm">Location</p>
+                                    <p class="text-primary font-medium">Nairobi, Kenya 🇰🇪</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="bg-black rounded-xl p-6 border border-gray-800">
-                        <h4 class="text-lg font-bold mb-4">Quick Response Times</h4>
+                    <div class="section-primary rounded-xl p-6 border border-themed">
+                        <h4 class="text-lg font-bold mb-4 text-primary">Quick Response Times</h4>
                         <div class="space-y-3">
                             <div class="flex items-center justify-between">
-                                <span class="text-gray-400">Email inquiries</span>
+                                <span class="text-secondary">Email inquiries</span>
                                 <span class="text-emerald-400 font-medium">< 24 hours</span>
                             </div>
                             <div class="flex items-center justify-between">
-                                <span class="text-gray-400">Project consultations</span>
+                                <span class="text-secondary">Project consultations</span>
                                 <span class="text-emerald-400 font-medium">< 48 hours</span>
                             </div>
                             <div class="flex items-center justify-between">
-                                <span class="text-gray-400">Availability</span>
+                                <span class="text-secondary">Availability</span>
                                 <span class="text-emerald-400 font-medium">Mon-Fri, 9AM-6PM EAT</span>
                             </div>
                         </div>
                     </div>
                 </div>
                 
-                <div class="bg-black rounded-xl p-8 border border-gray-800">
+                <div class="section-primary rounded-xl p-8 border border-themed">
                     <form class="space-y-6">
                         <div>
-                            <label for="name" class="block text-sm font-medium text-white mb-2">Full Name</label>
-                            <input type="text" id="name" name="name" class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Your full name">
+                            <label for="name" class="block text-sm font-medium text-primary mb-2">Full Name</label>
+                            <input type="text" id="name" name="name" class="w-full px-4 py-3 card-bg border border-themed rounded-md text-primary placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Your full name">
                         </div>
                         
                         <div>
-                            <label for="email" class="block text-sm font-medium text-white mb-2">Email Address</label>
-                            <input type="email" id="email" name="email" class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="your.email@company.com">
+                            <label for="email" class="block text-sm font-medium text-primary mb-2">Email Address</label>
+                            <input type="email" id="email" name="email" class="w-full px-4 py-3 card-bg border border-themed rounded-md text-primary placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="your.email@company.com">
                         </div>
                         
                         <div>
-                            <label for="company" class="block text-sm font-medium text-white mb-2">Company/Organization</label>
-                            <input type="text" id="company" name="company" class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Your company or organization">
+                            <label for="company" class="block text-sm font-medium text-primary mb-2">Company/Organization</label>
+                            <input type="text" id="company" name="company" class="w-full px-4 py-3 card-bg border border-themed rounded-md text-primary placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Your company or organization">
                         </div>
                         
                         <div>
-                            <label for="service" class="block text-sm font-medium text-white mb-2">Service Interest</label>
-                            <select id="service" name="service" class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-md text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <label for="service" class="block text-sm font-medium text-primary mb-2">Service Interest</label>
+                            <select id="service" name="service" class="w-full px-4 py-3 card-bg border border-themed rounded-md text-primary focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                                 <option value="">Select a service</option>
-                                <option value="ai-ml">AI & Machine Learning</option>
-                                <option value="data-analytics">Data Analytics & Visualization</option>
-                                <option value="mvp-development">MVP Development</option>
+                                <option value="ai-ml">AI & Machine Learning (KES 15,000+)</option>
+                                <option value="data-analytics">Data Analytics & Visualization (KES 10,000+)</option>
+                                <option value="mvp-development">MVP Development (KES 30,000+)</option>
                                 <option value="consulting">Data Strategy Consulting</option>
                                 <option value="custom">Custom Solution</option>
                             </select>
                         </div>
                         
                         <div>
-                            <label for="message" class="block text-sm font-medium text-white mb-2">Project Details</label>
-                            <textarea id="message" name="message" rows="4" class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Tell me about your project, goals, timeline, and any specific requirements..."></textarea>
+                            <label for="message" class="block text-sm font-medium text-primary mb-2">Project Details</label>
+                            <textarea id="message" name="message" rows="4" class="w-full px-4 py-3 card-bg border border-themed rounded-md text-primary placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Tell me about your project, goals, timeline, and any specific requirements..."></textarea>
                         </div>
                         
                         <button type="submit" class="w-full px-6 py-3 bg-gradient-to-r from-blue-600 to-emerald-500 hover:from-blue-700 hover:to-emerald-600 rounded-md text-white font-medium transition-colors">
@@ -935,59 +1112,67 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-black border-t border-gray-800 py-12">
+    <footer class="section-primary border-t border-themed py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div class="col-span-1 md:col-span-2">
                     <div class="flex items-center mb-4">
                         <span class="initials-logo text-2xl mr-3">DW</span>
-                        <span class="text-white font-semibold">Daniel Wanjala</span>
+                        <span class="text-primary font-semibold">Daniel Wanjala</span>
                     </div>
-                    <p class="text-gray-400 mb-6 max-w-md">Data Scientist & Machine Learning Engineer building intelligent systems that challenge the status quo and create meaningful impact through technology.</p>
+                    <p class="text-secondary mb-6 max-w-md">Data Scientist & Machine Learning Engineer building intelligent systems that challenge the status quo and create meaningful impact through technology.</p>
                     <div class="flex space-x-4">
-                        <a href="https://www.linkedin.com/in/daniel-wanjala-91/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile" class="w-10 h-10 bg-gray-800 hover:bg-blue-600 rounded-lg flex items-center justify-center transition-colors">
-                            <i class="fab fa-linkedin text-white"></i>
+                        <a href="https://www.linkedin.com/in/daniel-wanjala-91/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile" class="w-10 h-10 card-bg hover:bg-blue-600 rounded-lg flex items-center justify-center transition-colors">
+                            <i class="fab fa-linkedin text-primary"></i>
                         </a>
-                        <a href="https://github.com/MadScie254" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile" class="w-10 h-10 bg-gray-800 hover:bg-gray-700 rounded-lg flex items-center justify-center transition-colors">
-                            <i class="fab fa-github text-white"></i>
+                        <a href="https://github.com/MadScie254" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile" class="w-10 h-10 card-bg hover:bg-gray-700 rounded-lg flex items-center justify-center transition-colors">
+                            <i class="fab fa-github text-primary"></i>
                         </a>
-                        <a href="mailto:dmwanjala254@gmail.com" aria-label="Email Contact" class="w-10 h-10 bg-gray-800 hover:bg-red-600 rounded-lg flex items-center justify-center transition-colors">
-                            <i class="fas fa-envelope text-white"></i>
+                        <a href="mailto:dmwanjala254@gmail.com" aria-label="Email Contact" class="w-10 h-10 card-bg hover:bg-red-600 rounded-lg flex items-center justify-center transition-colors">
+                            <i class="fas fa-envelope text-primary"></i>
                         </a>
-                        <a href="https://www.hackerrank.com/profile/MadScie254" target="_blank" rel="noopener noreferrer" aria-label="HackerRank Profile" class="w-10 h-10 bg-gray-800 hover:bg-green-600 rounded-lg flex items-center justify-center transition-colors">
-                            <i class="fas fa-code text-white"></i>
+                        <a href="https://www.hackerrank.com/profile/MadScie254" target="_blank" rel="noopener noreferrer" aria-label="HackerRank Profile" class="w-10 h-10 card-bg hover:bg-green-600 rounded-lg flex items-center justify-center transition-colors">
+                            <i class="fas fa-code text-primary"></i>
+                        </a>
+                        <a href="https://wa.me/254742007277?text=Hello%20Daniel!%20I'm%20interested%20in%20your%20services." target="_blank" rel="noopener noreferrer" aria-label="WhatsApp Contact" class="w-10 h-10 card-bg hover:bg-green-600 rounded-lg flex items-center justify-center transition-colors">
+                            <i class="fab fa-whatsapp text-primary"></i>
                         </a>
                     </div>
                 </div>
                 
                 <div>
-                    <h3 class="text-white font-semibold mb-4">Quick Links</h3>
+                    <h3 class="text-primary font-semibold mb-4">Quick Links</h3>
                     <ul class="space-y-2">
-                        <li><a href="#about" class="text-gray-400 hover:text-white transition-colors">About</a></li>
-                        <li><a href="#services" class="text-gray-400 hover:text-white transition-colors">Services</a></li>
-                        <li><a href="#projects" class="text-gray-400 hover:text-white transition-colors">Projects</a></li>
-                        <li><a href="#resources" class="text-gray-400 hover:text-white transition-colors">Resources</a></li>
-                        <li><a href="#contact" class="text-gray-400 hover:text-white transition-colors">Contact</a></li>
+                        <li><a href="#about" class="text-secondary hover:text-primary transition-colors">About</a></li>
+                        <li><a href="#services" class="text-secondary hover:text-primary transition-colors">Services</a></li>
+                        <li><a href="#projects" class="text-secondary hover:text-primary transition-colors">Projects</a></li>
+                        <li><a href="#resources" class="text-secondary hover:text-primary transition-colors">Resources</a></li>
+                        <li><a href="#contact" class="text-secondary hover:text-primary transition-colors">Contact</a></li>
                     </ul>
                 </div>
                 
                 <div>
-                    <h3 class="text-white font-semibold mb-4">Services</h3>
+                    <h3 class="text-primary font-semibold mb-4">Services</h3>
                     <ul class="space-y-2">
-                        <li><a href="#services" class="text-gray-400 hover:text-white transition-colors">Machine Learning</a></li>
-                        <li><a href="#services" class="text-gray-400 hover:text-white transition-colors">Data Analytics</a></li>
-                        <li><a href="#services" class="text-gray-400 hover:text-white transition-colors">MVP Development</a></li>
-                        <li><a href="#services" class="text-gray-400 hover:text-white transition-colors">Consulting</a></li>
+                        <li><a href="#services" class="text-secondary hover:text-primary transition-colors">Machine Learning (KES 15K+)</a></li>
+                        <li><a href="#services" class="text-secondary hover:text-primary transition-colors">Data Analytics (KES 10K+)</a></li>
+                        <li><a href="#services" class="text-secondary hover:text-primary transition-colors">MVP Development (KES 30K+)</a></li>
+                        <li><a href="#services" class="text-secondary hover:text-primary transition-colors">Consulting</a></li>
                     </ul>
                 </div>
             </div>
             
-            <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
-                <p class="text-gray-400 text-sm">&copy; 2025 Daniel Wanjala. All rights reserved.</p>
-                <p class="text-gray-400 text-sm mt-4 md:mt-0">Built with passion for data and innovation 🚀</p>
+            <div class="border-t border-themed mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-secondary text-sm">&copy; 2025 Daniel Wanjala. All rights reserved.</p>
+                <p class="text-secondary text-sm mt-4 md:mt-0">Built with passion for data and innovation 🚀</p>
             </div>
         </div>
     </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/254742007277?text=Hello%20Daniel!%20I'm%20interested%20in%20your%20services." target="_blank" rel="noopener noreferrer" class="whatsapp-float" title="Chat with me on WhatsApp" aria-label="Chat with Daniel on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
 
     <script>
         // Theme toggle functionality
@@ -995,17 +1180,22 @@
         const body = document.body;
         const icon = themeToggle.querySelector('i');
 
+        // Load saved theme or default to dark
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        if (savedTheme === 'light') {
+            body.classList.add('light');
+            icon.classList.replace('fa-moon', 'fa-sun');
+        }
+
         themeToggle.addEventListener('click', () => {
             body.classList.toggle('light');
             
             if (body.classList.contains('light')) {
                 icon.classList.replace('fa-moon', 'fa-sun');
-                body.style.backgroundColor = '#f8f8f8';
-                body.style.color = '#0a0a0a';
+                localStorage.setItem('theme', 'light');
             } else {
                 icon.classList.replace('fa-sun', 'fa-moon');
-                body.style.backgroundColor = '#0a0a0a';
-                body.style.color = '#f8f8f8';
+                localStorage.setItem('theme', 'dark');
             }
         });
 
@@ -1050,10 +1240,12 @@
         // Add scroll effect to navigation
         window.addEventListener('scroll', () => {
             const nav = document.querySelector('nav');
+            const isLight = body.classList.contains('light');
+            
             if (window.scrollY > 100) {
-                nav.style.backgroundColor = 'rgba(0, 0, 0, 0.95)';
+                nav.style.backgroundColor = isLight ? 'rgba(248, 250, 252, 0.95)' : 'rgba(26, 26, 26, 0.95)';
             } else {
-                nav.style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
+                nav.style.backgroundColor = isLight ? 'rgba(248, 250, 252, 0.9)' : 'rgba(26, 26, 26, 0.9)';
             }
         });
     </script>
