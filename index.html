@@ -1883,21 +1883,57 @@
                 const typingIndicator = this.addTypingIndicator(containerId);
                 
                 try {
-                    // Simulate API call delay
-                    await new Promise(resolve => setTimeout(resolve, 2000));
-                    
+                    const response = await this.callOpenAIAPI(userMessage);
                     this.removeTypingIndicator();
-                    
-                    // Generate comprehensive response
-                    const response = this.generateComprehensiveResponse(userMessage);
                     this.addAIMessage(response, containerId);
                     
                 } catch (error) {
                     this.removeTypingIndicator();
                     this.addAIMessage("I apologize, but I'm experiencing some technical difficulties. Please try again later.", containerId);
+                    console.error('AI API Error:', error);
                 } finally {
                     this.isTyping = false;
                 }
+            }
+
+            async callOpenAIAPI(userMessage) {
+                const response = await fetch('https://api.openai.com/v1/chat/completions', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${this.apiKey}`
+                    },
+                    body: JSON.stringify({
+                        model: 'gpt-4',
+                        messages: [
+                            {
+                                role: 'system',
+                                content: `You are Daniel Wanjala's AI assistant. You are a comprehensive, thorough guide that provides detailed responses of at least 1500 words. You have expertise in:
+                                - Data Science and Machine Learning
+                                - Technology Career Development
+                                - Economic Development in emerging markets (especially Kenya/Africa)
+                                - Healthcare Analytics
+                                - Financial Technology
+                                - AI and Technology Trends
+                                
+                                Always provide comprehensive, detailed, and practical insights. Be professional, knowledgeable, and helpful. Use Daniel's background in data science, healthcare work at Kingdom Hospital, and economic development experience to inform your responses.`
+                            },
+                            {
+                                role: 'user',
+                                content: userMessage
+                            }
+                        ],
+                        max_tokens: 4000,
+                        temperature: 0.7
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`API Error: ${response.status}`);
+                }
+
+                const data = await response.json();
+                return data.choices[0].message.content;
             }
 
             generateComprehensiveResponse(userMessage) {
